@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 /**
- * Represents a Person's lease in EstateMate.
+ * Represents a tenant's lease in EstateMate.
  * Guarantees: immutable; is valid as declared in {@link #isValidLease(String)}
  */
 public class Lease {
@@ -17,7 +17,7 @@ public class Lease {
     public static final String MESSAGE_CONSTRAINTS = "Leases should be of the format \"yyyy-MM-dd yyyy-MM-dd\" "
             + "and adhere to the following constraints:\n"
             + "1. The first date is the start date and the second date is the end date.\n"
-            + "2. The end date must be on the same day or after the start date."
+            + "2. The end date must be on the same day or after the start date.\n"
             + "3. The dates must be valid calendar dates.";
 
     /*

@@ -149,6 +149,19 @@ public class EstateMate implements ReadOnlyEstateMate {
         }
     }
 
+    public void setJobById(int id, Job editedJob) {
+        requireNonNull(editedJob);
+        Job target = jobs.asUnmodifiableObservableList()
+                .stream()
+                .filter(j -> j.getId() == id)
+                .findFirst()
+                .orElse(null);
+        if (target == null) {
+            return;
+        }
+        jobs.setJob(target, editedJob);
+    }
+
     /**
      * Marks job of the given id from the address book
      * @param id

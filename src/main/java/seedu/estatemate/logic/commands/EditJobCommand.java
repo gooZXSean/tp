@@ -18,17 +18,17 @@ public class EditJobCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the description of the job with the given ID.\n"
-            + "Parameters: ID " + PREFIX_DESCRIPTION + "DESCRIPTION\n"
+            + "Parameters: ID (must be a positive integer between 1 - 2147483647) " + PREFIX_DESCRIPTION
+            + "DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " 5 " + PREFIX_DESCRIPTION + "Repair corridor lights";
 
-    public static final String MESSAGE_SUCCESS = "Edited job #%1$d";
-    public static final String MESSAGE_DUPLICATE_JOB = "This description already exists for another job.";
+    public static final String MESSAGE_SUCCESS = "Edited job #%1$d: %2$s";
 
     private final int targetId;
     private final Description newDescription;
 
     /**
-     * @param targetId of the job to edit
+     * @param targetId       of the job to edit
      * @param newDescription to edit the job with
      */
     public EditJobCommand(int targetId, Description newDescription) {
@@ -46,13 +46,9 @@ public class EditJobCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_JOB_ID);
         }
 
-        // Ensure uniqueness by description
-        if (model.hasJobWithDescription(newDescription)) {
-            throw new CommandException(MESSAGE_DUPLICATE_JOB);
-        }
 
         model.editJobById(targetId, newDescription);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, targetId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetId, newDescription));
     }
 
     @Override

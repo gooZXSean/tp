@@ -17,26 +17,32 @@ public class LinkCommandParser implements Parser<LinkCommand> {
      * and returns an LinkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public LinkCommand parse(String args) throws ParseException {
         requireNonNull(args);
-
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_JOB);
 
         if (!jobPrefixPresent(args)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     LinkCommand.MESSAGE_USAGE));
         }
 
-        Index index;
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_JOB);
+
+        // parse tenant index
+        final Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX, pe);
         }
 
-        // watch out for this, probably need more rigorous check for valid job
-        Integer jobNumber = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get());
+        // parse job number
+        final Integer jobNumber;
+        try {
+            jobNumber = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get());
+        } catch (ParseException pe) {
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_JOB, pe);
+        }
 
         return new LinkCommand(index, jobNumber);
     }

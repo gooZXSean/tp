@@ -26,8 +26,10 @@ import seedu.estatemate.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_JOB = "Job is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX =
+            "Tenant index must be a non-zero unsigned integer between 1 - 2147483647";
+    public static final String MESSAGE_INVALID_JOB =
+            "Job number must be a non-zero unsigned integer between between 1 - 2147483647";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -100,8 +102,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String leaseAmount} into an {@code LeaseAmount}. Leading and trailing whitespaces
-     * will be trimmed.
+     * Parses a {@code String leaseAmount} into an {@code LeaseAmount}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code leaseAmount} is invalid.
      */
@@ -169,8 +171,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String description} into an {@code Description}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String description} into an {@code Description}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code Description} is invalid.
      */
@@ -184,8 +186,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String job index} into an {@code Integer}
-     * Leading and trailing whitespaces will be trimmed
+     * Parses a {@code String job index} into an {@code Integer} Leading and trailing whitespaces will be trimmed
+     *
      * @return Integer represented by job String
      * @throws ParseException if the returned integer is negative
      */

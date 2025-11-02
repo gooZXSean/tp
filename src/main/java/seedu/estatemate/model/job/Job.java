@@ -5,7 +5,7 @@ import static seedu.estatemate.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.estatemate.commons.util.ToStringBuilder;
 
 /**
- * Represents a Job in the address book. Guarantees: details are present and not null, field values are validated,
+ * Represents a Job in EstateMate. Guarantees: details are present and not null, field values are validated,
  * immutable.
  */
 public class Job {

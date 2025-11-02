@@ -6,6 +6,7 @@ import static seedu.estatemate.testutil.TypicalPersons.getTypicalEstateMate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.estatemate.logic.Messages;
 import seedu.estatemate.model.Model;
 import seedu.estatemate.model.ModelManager;
 import seedu.estatemate.model.UserPrefs;
@@ -23,8 +24,8 @@ public class ListJobCommandTest {
 
     @Test
     public void execute_jobListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListJobCommand(), model, ListJobCommand.MESSAGE_SUCCESS
-                + ": " + expectedModel.getFilteredJobList().size(), expectedModel);
+        assertCommandSuccess(new ListJobCommand(), model, String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW,
+                expectedModel.getFilteredJobList().size()), expectedModel);
     }
 
     // no test for filteredJobList here like in ListCommandTest since job list does not use indexing to reference jobs

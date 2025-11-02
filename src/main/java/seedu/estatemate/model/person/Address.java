@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.estatemate.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a tenant's address in EstateMate.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
+    public static final int MAX_LENGTH = 500;
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, it should not be blank\n"
+            + ", and must not exceed " + MAX_LENGTH + "characters long.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -34,7 +36,7 @@ public class Address {
      * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 
     @Override

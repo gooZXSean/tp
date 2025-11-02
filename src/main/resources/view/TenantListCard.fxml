@@ -29,12 +29,30 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="lease" styleClass="cell_small_label" text="\$lease" />
-      <Label fx:id="leaseAmount" styleClass="cell_small_label" text="\$lease amount" />
-      <Label fx:id="payDate" styleClass="cell_small_label" text="\$pay date" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <HBox spacing="5">
+        <Label text="Phone Number:" styleClass="cell_small_label_bold"/>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      </HBox>
+      <HBox spacing="5">
+        <Label text="Addess:" styleClass="cell_small_label_bold"/>
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      </HBox>
+      <HBox>
+        <Label text="Lease Period: " styleClass="cell_small_label_bold"/>
+        <Label fx:id="lease" styleClass="cell_small_label" text="\$lease" />
+      </HBox>
+      <HBox>
+        <Label text="Lease Amount: " styleClass="cell_small_label_bold"/>
+        <Label fx:id="leaseAmount" styleClass="cell_small_label" text="\$lease amount" />
+      </HBox>
+      <HBox>
+        <Label text="Pay Date: " styleClass="cell_small_label_bold"/>
+        <Label fx:id="payDate" styleClass="cell_small_label" text="\$pay date" />
+      </HBox>
+      <HBox>
+        <Label text="Email: " styleClass="cell_small_label_bold"/>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      </HBox>
 
       <Separator>
               <VBox.margin>
@@ -44,8 +62,14 @@
 
       <VBox spacing="5" style="-fx-background-color: #474747; -fx-padding: 10;">
         <Label fx:id="maintenanceTitle" style="-fx-font-weight: bold;" text="Maintenance Information:" />
-        <Label fx:id="maintenanceId" styleClass="cell_small_label"/>
-        <Label fx:id="maintenanceDescription" styleClass="cell_small_label"/>
+        <HBox>
+          <Label text="Job Number(s): " styleClass="cell_small_label_bold"/>
+          <Label fx:id="maintenanceId" styleClass="cell_small_label"/>
+        </HBox>
+        <HBox>
+          <Label text="Job Description(s): " styleClass="cell_small_label_bold"/>
+          <Label fx:id="maintenanceDescription" styleClass="cell_small_label"/>
+        </HBox>
       </VBox>
 
     </VBox>

@@ -19,11 +19,14 @@ public class EditJobCommandParser implements Parser<EditJobCommand> {
         if (!map.getValue(PREFIX_DESCRIPTION).isPresent() || map.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditJobCommand.MESSAGE_USAGE));
         }
-        String preamble = map.getPreamble().trim();
-        if (!preamble.matches("\\d+")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditJobCommand.MESSAGE_USAGE));
+
+        final int id;
+        try {
+            id = ParserUtil.parseJob(map.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_JOB, pe);
         }
-        int id = Integer.parseInt(preamble);
+
         Description desc = ParserUtil.parseDescription(map.getValue(PREFIX_DESCRIPTION).get());
         return new EditJobCommand(id, desc);
     }

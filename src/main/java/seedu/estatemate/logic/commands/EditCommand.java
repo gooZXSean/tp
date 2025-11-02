@@ -10,7 +10,7 @@ import static seedu.estatemate.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.estatemate.logic.parser.CliSyntax.PREFIX_PAYDATE;
 import static seedu.estatemate.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.estatemate.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.estatemate.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.estatemate.model.Model.PREDICATE_SHOW_ALL_TENANTS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,16 +37,16 @@ import seedu.estatemate.model.person.Phone;
 import seedu.estatemate.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing tenant in EstateMate.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the tenant identified "
+            + "by the index number used in the displayed tenant list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer between 1 - 2147483647) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -60,9 +60,9 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_TENANT_SUCCESS = "Edited tenant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TENANT = "This tenant already exists in EstateMate.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -85,19 +85,19 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TENANT_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TENANT);
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_TENANTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_TENANT_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**

@@ -8,12 +8,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.estatemate.model.job.exceptions.DuplicateJobException;
 import seedu.estatemate.model.job.exceptions.JobNotFoundException;
 
 /**
- * A list of Jobs Supports a minimal set of list operations. Enforces uniqueness by job description and does not allow
- * nulls.
+ * A list of Jobs Supports a minimal set of list operations. Jobs of duplicate description are allowed.
  */
 public class UniqueJobList implements Iterable<Job> {
 
@@ -42,9 +40,6 @@ public class UniqueJobList implements Iterable<Job> {
      */
     public void add(Job toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateJobException();
-        }
         internalList.add(toAdd);
     }
 
@@ -86,20 +81,26 @@ public class UniqueJobList implements Iterable<Job> {
         toMark.setDone(false);
     }
 
+    /**
+     * Replaces the contents of this list with {@code jobs}. {@code jobs} must not contain duplicate jobs.
+     */
     public void setJobs(List<Job> jobs) {
         requireNonNull(jobs);
-        if (!jobsAreUnique(jobs)) {
-            throw new DuplicateJobException();
-        }
         internalList.setAll(jobs);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}. {@code persons} must not contain duplicate persons.
+     * Replaces the {@code target} with {@code editedJob}
      */
-    public void setJob(List<Job> jobs) {
-        requireAllNonNull(jobs);
-        internalList.setAll(jobs);
+    public void setJob(Job target, Job editedJob) {
+        requireAllNonNull(target, editedJob);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new JobNotFoundException();
+        }
+
+        internalList.set(index, editedJob);
     }
 
     /**

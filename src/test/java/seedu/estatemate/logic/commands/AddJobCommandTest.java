@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.estatemate.commons.core.GuiSettings;
-import seedu.estatemate.logic.commands.exceptions.CommandException;
 import seedu.estatemate.model.EstateMate;
 import seedu.estatemate.model.Model;
 import seedu.estatemate.model.ReadOnlyEstateMate;
@@ -49,15 +48,6 @@ public class AddJobCommandTest {
         assertEquals(1, modelStub.jobsAdded.size());
         assertEquals("Fix sink leak", modelStub.jobsAdded.get(0).getDescription().toString());
         assertEquals(1, modelStub.jobsAdded.get(0).getId());
-    }
-
-    @Test
-    public void execute_duplicateJob_throwsCommandException() {
-        Description desc = new Description("Replace light bulb");
-        ModelStub modelStub = new ModelStubWithExistingDescription(desc);
-
-        AddJobCommand command = new AddJobCommand(desc);
-        assertThrows(CommandException.class, AddJobCommand.MESSAGE_DUPLICATE_JOB, () -> command.execute(modelStub));
     }
 
     @Test

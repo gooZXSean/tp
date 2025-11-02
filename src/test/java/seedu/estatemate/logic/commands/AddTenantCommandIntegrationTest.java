@@ -42,7 +42,7 @@ public class AddTenantCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getEstateMate().getPersonList().get(0);
         assertCommandFailure(new AddTenantCommand(personInList), model,
-                AddTenantCommand.MESSAGE_DUPLICATE_PERSON);
+                AddTenantCommand.MESSAGE_DUPLICATE_TENANT);
     }
 
 }

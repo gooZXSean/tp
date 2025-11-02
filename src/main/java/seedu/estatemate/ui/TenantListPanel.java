@@ -12,7 +12,7 @@ import seedu.estatemate.model.Model;
 import seedu.estatemate.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tenants.
  */
 public class TenantListPanel extends UiPart<Region> {
     private static final String FXML = "TenantListPanel.fxml";

@@ -38,7 +38,7 @@ public class EditJobCommandParserTest {
     public void parse_nonNumericId_failure() {
         assertParseFailure(parser,
                 "abc d/Fix sink leak",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditJobCommand.MESSAGE_USAGE));
+                ParserUtil.MESSAGE_INVALID_JOB);
     }
 
     @Test
@@ -60,5 +60,10 @@ public class EditJobCommandParserTest {
         assertParseFailure(parser,
                 "3 d/",
                 Description.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_outOfRangeJobNumber_failure() {
+        assertParseFailure(parser, "2147483648 d/new desc", ParserUtil.MESSAGE_INVALID_JOB);
     }
 }

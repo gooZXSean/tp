@@ -28,4 +28,9 @@ public class DeleteJobCommandParserTest {
         assertParseFailure(parser, "   ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteJobCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_outOfRange_failure() {
+        assertParseFailure(parser, "2147483648", ParserUtil.MESSAGE_INVALID_JOB);
+    }
 }

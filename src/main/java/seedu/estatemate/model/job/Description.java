@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.estatemate.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Job's description in the address book.
+ * Represents a Job's description in EstateMate.
  */
 public class Description {
     public static final String MESSAGE_CONSTRAINTS =

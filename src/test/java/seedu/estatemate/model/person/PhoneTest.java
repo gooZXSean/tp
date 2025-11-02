@@ -30,12 +30,20 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("++65 123")); // more than one leading '+'
+        assertFalse(Phone.isValidPhone("65+123")); // '+' not at the start
+        assertFalse(Phone.isValidPhone("123_456")); // invalid symbol '_'
+        assertFalse(Phone.isValidPhone("(12)")); // fewer than 3 digits overall
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertTrue(Phone.isValidPhone("9123-4567")); // dashes
+        assertTrue(Phone.isValidPhone("(65) 9123-4567")); // parentheses + space + dash
+        assertTrue(Phone.isValidPhone("+65 9123 4567")); // leading '+'
+        assertTrue(Phone.isValidPhone("+1 (202) 555-0173")); // mixed allowed punctuation
     }
 
     @Test

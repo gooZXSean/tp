@@ -12,7 +12,7 @@ import seedu.estatemate.model.Model;
 import seedu.estatemate.model.person.Person;
 
 /**
- * Deletes a tenant identified using it's displayed index from the address book.
+ * Deletes a tenant identified using its displayed index from EstateMate.
  */
 public class DeleteTenantCommand extends Command {
 
@@ -20,7 +20,7 @@ public class DeleteTenantCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tenant using the index number displayed in the tenant list.\n"
-            + "Parameters: id (must be a positive integer)\n"
+            + "Parameters: id (must be a positive integer between 1 - 2147483647) \n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TENANT_SUCCESS = "Deleted tenant successfully: %1$s";
@@ -37,7 +37,7 @@ public class DeleteTenantCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TENANT_DISPLAYED_INDEX);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());

@@ -1,6 +1,5 @@
 package seedu.estatemate.logic.commands;
 
-import static seedu.estatemate.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.estatemate.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.estatemate.testutil.TypicalPersons.getTypicalEstateMate;
 
@@ -45,17 +44,25 @@ public class AddJobCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicateDescription_throwsCommandException() {
+    public void execute_sameDescriptionTwice_success() {
         Description description = new Description("Replace light bulb");
 
-        // seed an existing job with the same description
-        int seededId = model.nextJobId();
-        model.addJob(new Job(description, seededId));
+        // seed the first job in the model
+        int firstId = model.nextJobId();
+        model.addJob(new Job(description, firstId));
 
-        assertCommandFailure(
-                new AddJobCommand(description),
+        // expected model = current state + 1 more job with SAME description
+        Model expectedModel = new ModelManager(model.getEstateMate(), new UserPrefs());
+        int secondId = expectedModel.nextJobId();
+        expectedModel.addJob(new Job(description, secondId));
+
+        AddJobCommand command = new AddJobCommand(description);
+
+        assertCommandSuccess(
+                command,
                 model,
-                AddJobCommand.MESSAGE_DUPLICATE_JOB
+                String.format(AddJobCommand.MESSAGE_SUCCESS, secondId, description),
+                expectedModel
         );
     }
 }

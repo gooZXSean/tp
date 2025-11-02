@@ -73,12 +73,12 @@ public class TenantCard extends UiPart<Region> {
     private void initializePersonInformation(int displayedIndex) {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText("Phone Number: " + person.getPhone().value);
-        address.setText("Address: " + person.getAddress().value);
-        lease.setText("Lease Period: " + person.getLease().toDisplayValue());
-        leaseAmount.setText("Lease Amount: " + person.getLeaseAmount().toDisplayValue());
-        payDate.setText("Pay Date: " + person.getPayDate().value);
-        email.setText("Email: " + person.getEmail().value);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        lease.setText(person.getLease().toDisplayValue());
+        leaseAmount.setText(person.getLeaseAmount().toDisplayValue());
+        payDate.setText(person.getPayDate().value);
+        email.setText(person.getEmail().value);
     }
 
     private void initializeTags() {
@@ -93,14 +93,14 @@ public class TenantCard extends UiPart<Region> {
     }
 
     private void displayNoJobs() {
-        maintenanceId.setText("Job Number: -");
-        maintenanceDescription.setText("Job Description: No maintenance jobs yet");
+        maintenanceId.setText("-");
+        maintenanceDescription.setText("No maintenance jobs yet");
     }
 
     private void displayJobNumbers(List<Integer> jobIds) {
         if (jobIds.isEmpty()) {
-            maintenanceId.setText("Job Number: -");
-            maintenanceDescription.setText("Job Description: No maintenance jobs yet");
+            maintenanceId.setText("-");
+            maintenanceDescription.setText("No maintenance jobs yet");
         } else {
             StringBuilder jobNumbers = new StringBuilder();
             for (int i = 0; i < jobIds.size(); i++) {
@@ -109,12 +109,12 @@ public class TenantCard extends UiPart<Region> {
                     jobNumbers.append(", ");
                 }
             }
-            maintenanceId.setText("Job Number(s): " + jobNumbers);
+            maintenanceId.setText(jobNumbers.toString());
         }
     }
 
     private void displayJobDescriptions(List<Integer> jobIds) {
-        StringBuilder jobDescriptions = new StringBuilder("Job Description(s):\n");
+        StringBuilder jobDescriptions = new StringBuilder("\n");
         for (Integer id : jobIds) {
             String eachDescription = model.getJobDescriptionById(id);
             boolean isCompleted = model.isJobCompleted(id);

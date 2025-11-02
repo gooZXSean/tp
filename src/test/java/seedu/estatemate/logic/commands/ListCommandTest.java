@@ -8,6 +8,7 @@ import static seedu.estatemate.testutil.TypicalPersons.getTypicalEstateMate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.estatemate.logic.Messages;
 import seedu.estatemate.model.Model;
 import seedu.estatemate.model.ModelManager;
 import seedu.estatemate.model.UserPrefs;
@@ -28,12 +29,15 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, String.format(
+                Messages.MESSAGE_TENANTS_LISTED_OVERVIEW, model.getFilteredPersonList().size()), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model,
+                String.format(Messages.MESSAGE_TENANTS_LISTED_OVERVIEW, 7),
+                expectedModel);
     }
 }

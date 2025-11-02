@@ -3,7 +3,7 @@ package seedu.estatemate.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.estatemate.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.estatemate.logic.parser.CliSyntax.PREFIX_JOB;
-import static seedu.estatemate.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.estatemate.model.Model.PREDICATE_SHOW_ALL_TENANTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +29,12 @@ import seedu.estatemate.model.tag.Tag;
 public class LinkCommand extends Command {
     public static final String COMMAND_WORD = "link";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Links a job to a tenant. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_JOB + "JOB NUMBER\n"
+            + "Parameters: INDEX (must be a positive integer between 1 - 2147483647) "
+            + PREFIX_JOB + "JOB NUMBER (must be a positive integer between 1 - 2147483647) \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_JOB + "1 ";
 
-    public static final String MESSAGE_LINK_JOB_SUCCESS = "New Job linked: %1$s";
+    public static final String MESSAGE_LINK_JOB_SUCCESS = "Job #%1$s linked to %2$s";
     public static final String MESSAGE_ALREADY_LINKED_JOB = "This job is already linked to this tenant!";
 
     private final Index index;
@@ -56,7 +56,7 @@ public class LinkCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TENANT_DISPLAYED_INDEX);
         }
 
         if (!model.getUnfilteredJobList().stream().anyMatch(j -> j.getId() == jobId)) {
@@ -73,8 +73,8 @@ public class LinkCommand extends Command {
 
         Person linkedPerson = createPersonWithJob(personToLink, jobId);
         model.setPerson(personToLink, linkedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_LINK_JOB_SUCCESS, Messages.format(linkedPerson)));
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_TENANTS);
+        return new CommandResult(String.format(MESSAGE_LINK_JOB_SUCCESS, jobId, linkedPerson.getName()));
     }
 
     private static Person createPersonWithJob(Person personToEdit, Integer job) {

@@ -54,7 +54,7 @@ public class AddTenantCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class,
-                AddTenantCommand.MESSAGE_DUPLICATE_PERSON, () -> addTenantCommand.execute(modelStub));
+                AddTenantCommand.MESSAGE_DUPLICATE_TENANT, () -> addTenantCommand.execute(modelStub));
     }
 
     @Test

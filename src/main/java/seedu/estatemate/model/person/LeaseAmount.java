@@ -8,7 +8,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 /**
- * Represents a Person's lease amount in EstateMate.
+ * Represents a tenant's lease amount in EstateMate.
  * Guarantees: immutable; is valid as declared in {@link #isValidLeaseAmount(String)}
  */
 public class LeaseAmount {

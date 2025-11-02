@@ -8,10 +8,11 @@ import seedu.estatemate.model.Model;
 import seedu.estatemate.model.job.JobContainsKeywordsPredicate;
 
 /**
- * Finds and lists all jobs whose description contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all jobs whose description contains any of the argument keywords. Keyword matching is case
+ * insensitive.
  */
 public class FindJobCommand extends Command {
+
     public static final String COMMAND_WORD = "fjob";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose descriptions contain any of "
